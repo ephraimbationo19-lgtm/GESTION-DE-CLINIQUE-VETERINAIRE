@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Espace Propriétaire & Finances | Délices du Faso</title>
+  <link rel="stylesheet" href="admin.css">
+  <script src="admin.js" defer></script>
+</head>
+<body>
+
+  <!-- ===== HEADER ===== -->
+  <header class="header">
+    <div class="header-brand">
+      <div class="header-logo-badge">
+        <svg viewBox="0 0 24 24" width="20" height="20" stroke="currentColor" fill="none" stroke-width="2"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
+      </div>
+      <div>
+        <h1>Délices du Faso</h1>
+        <p>Espace de gestion &amp; tableau de bord financier</p>
+      </div>
+    </div>
+    <div class="header-actions">
+      <a href="index.html" class="back-link">← Retour au site client</a>
+    </div>
+  </header>
+
+  <!-- ===== NAVIGATION ONGLETS ===== -->
+  <nav class="admin-tabs-nav">
+    <button class="tab-btn active" data-tab="finances">
+      Finances &amp; Commandes
+    </button>
+    <button class="tab-btn" data-tab="catalogue">
+      Catalogue des Plats
+    </button>
+    <button class="tab-btn" data-tab="nouveau-plat">
+      Ajouter un Plat
+    </button>
+  </nav>
+
+  <main class="container">
+
+    <!-- =========================================================
+         ONGLET 1 : FINANCES & CLIENTS
+         ========================================================= -->
+    <section id="tab-finances" class="tab-content active">
+
+      <!-- Message d'accueil / bannière -->
+      <div class="welcome">
+        <h2>Tableau de bord financier</h2>
+        <p>Suivi en temps réel de votre chiffre d'affaires, de la clientèle et des commandes enregistrées.</p>
+      </div>
+
+      <!-- KPI CARDS (Indicateurs clés avec icônes SVG sobres) -->
+      <div class="kpi-grid">
+        <div class="kpi-card kpi-primary">
+          <div class="kpi-icon">
+            <svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" fill="none" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M16 8h-6a2 2 0 1 0 0 4h4a2 2 0 1 1 0 4H8"/><line x1="12" y1="6" x2="12" y2="8"/><line x1="12" y1="16" x2="12" y2="18"/></svg>
+          </div>
+          <div class="kpi-info">
+            <span class="kpi-label">Somme Gagnée (Total)</span>
+            <div class="kpi-value" id="kpi-ca">0 <small>FCFA</small></div>
+            <span class="kpi-subtitle">Chiffre d'affaires cumulé</span>
+          </div>
+        </div>
+
+        <div class="kpi-card kpi-success">
+          <div class="kpi-icon">
+            <svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" fill="none" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+          </div>
+          <div class="kpi-info">
+            <span class="kpi-label">Clients / Commandes</span>
+            <div class="kpi-value" id="kpi-clients">0</div>
+            <span class="kpi-subtitle" id="kpi-clients-details">0 client unique</span>
+          </div>
+        </div>
+
+        <div class="kpi-card kpi-warning">
+          <div class="kpi-icon">
+            <svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" fill="none" stroke-width="2"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
+          </div>
+          <div class="kpi-info">
+            <span class="kpi-label">Panier Moyen</span>
+            <div class="kpi-value" id="kpi-panier-moyen">0 <small>FCFA</small></div>
+            <span class="kpi-subtitle">Moyenne par commande</span>
+          </div>
+        </div>
+
+        <div class="kpi-card kpi-info">
+          <div class="kpi-icon">
+            <svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" fill="none" stroke-width="2"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/><polyline points="3.27 6.96 12 12.01 20.73 6.96"/><line x1="12" y1="22.08" x2="12" y2="12"/></svg>
+          </div>
+          <div class="kpi-info">
+            <span class="kpi-label">Portions Servies</span>
+            <div class="kpi-value" id="kpi-plats-vendus">0</div>
+            <span class="kpi-subtitle">Plats vendus au total</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- ENREGISTREMENT VENTE DIRECTE (COMPTOIR / SUR PLACE) -->
+      <div class="panel quick-sale-panel">
+        <div class="panel-header">
+          <h3>Vente rapide (Sur place / Comptoir)</h3>
+          <p>Enregistrez une commande réglée en espèces ou paiement mobile au restaurant.</p>
+        </div>
+
+        <form id="quick-sale-form" class="quick-sale-form">
+          <div class="quick-sale-grid">
+            <div class="form-group">
+              <label for="sale-dish">Choisir le plat</label>
+              <select id="sale-dish" required>
+                <option value="">-- Sélectionner un plat --</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label for="sale-qty">Quantité</label>
+              <input type="number" id="sale-qty" min="1" value="1" required>
+            </div>
+
+            <div class="form-group">
+              <label for="sale-client">Nom du client</label>
+              <input type="text" id="sale-client" placeholder="Ex: M. Ouedraogo" value="Client sur place">
+            </div>
+
+            <div class="form-group">
+              <label for="sale-payment">Paiement</label>
+              <select id="sale-payment">
+                <option value="Espèces">Espèces</option>
+                <option value="Orange Money">Orange Money</option>
+                <option value="Moov Money">Moov Money</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="quick-sale-actions">
+            <button type="submit" class="btn-primary">
+              Encaisser la vente
+            </button>
+          </div>
+        </form>
+      </div>
+
+      <!-- HISTORIQUE DES COMMANDES & CLIENTS -->
+      <div class="panel">
+        <div class="panel-header-with-actions">
+          <div>
+            <h3>Historique des Commandes &amp; Ventes</h3>
+            <p>Liste détaillée de toutes les commandes enregistrées (WhatsApp et sur place).</p>
+          </div>
+          <div class="finance-actions-tools">
+            <button type="button" id="btn-seed-orders" class="btn-outline" title="Générer des exemples">
+              Données de test
+            </button>
+            <button type="button" id="btn-reset-finances" class="btn-danger-outline" title="Réinitialiser l'historique">
+              Vider l'historique
+            </button>
+          </div>
+        </div>
+
+        <div class="table-responsive">
+          <table class="orders-table">
+            <thead>
+              <tr>
+                <th>Réf.</th>
+                <th>Date &amp; Heure</th>
+                <th>Client</th>
+                <th>Plats commandés</th>
+                <th>Montant</th>
+                <th>Canal</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+            <tbody id="orders-tbody">
+              <!-- Rempli par JavaScript -->
+            </tbody>
+          </table>
+        </div>
+
+        <p id="empty-orders-msg" class="empty-message" hidden>
+          Aucune commande enregistrée pour le moment.
+        </p>
+      </div>
+
+    </section>
+
+    <!-- =========================================================
+         ONGLET 2 : CATALOGUE DES PLATS
+         ========================================================= -->
+    <section id="tab-catalogue" class="tab-content">
+      <div class="panel">
+        <div class="panel-header-with-actions">
+          <div>
+            <h2>Carte des Plats</h2>
+            <p>Gérez les prix, la disponibilité et les informations de vos plats.</p>
+          </div>
+          <div class="catalogue-actions-tools">
+            <button type="button" id="btn-add-shortcut" class="btn-primary">
+              Nouveau Plat
+            </button>
+            <button type="button" id="btn-reset-catalog" class="btn-outline" title="Restaurer les plats de base">
+              Restaurer la carte
+            </button>
+          </div>
+        </div>
+
+        <div class="menu-heading">
+          <span id="product-count">0 plat</span>
+          <div class="filter-category-pills" id="admin-category-filters">
+            <button type="button" class="pill active" data-filter="tous">Tous</button>
+            <button type="button" class="pill" data-filter="plats">Plats</button>
+            <button type="button" class="pill" data-filter="grillades">Grillades</button>
+            <button type="button" class="pill" data-filter="boissons">Boissons</button>
+            <button type="button" class="pill" data-filter="desserts">Desserts</button>
+          </div>
+        </div>
+
+        <div id="product-list" class="product-list"></div>
+
+        <p id="empty-message" class="empty-message" hidden>
+          Aucun plat dans le catalogue. Cliquez sur « Nouveau Plat » pour en ajouter un.
+        </p>
+      </div>
+    </section>
+
+    <!-- =========================================================
+         ONGLET 3 : FORMULAIRE AJOUT / MODIFICATION DE PLAT
+         ========================================================= -->
+    <section id="tab-nouveau-plat" class="tab-content">
+      <div class="panel form-panel">
+        <h2 id="form-title">Ajouter un plat au menu</h2>
+        <p class="form-desc">Ce plat sera immédiatement visible sur le site et pourra être commandé par vos clients.</p>
+
+        <form id="product-form">
+          <input type="hidden" id="product-id">
+
+          <div class="form-grid">
+            <div class="form-group">
+              <label for="name">Nom du plat *</label>
+              <input id="name" type="text" placeholder="Ex. Alloco saucisses, Capitaine braisé..." required>
+            </div>
+
+            <div class="form-group">
+              <label for="price">Prix en FCFA *</label>
+              <input id="price" type="number" min="1" step="50" placeholder="Ex. 2000" required>
+            </div>
+
+            <div class="form-group">
+              <label for="category">Catégorie *</label>
+              <select id="category" required>
+                <option value="plats">Plats traditionnels &amp; Riz</option>
+                <option value="grillades">Grillades &amp; Viandes</option>
+                <option value="boissons">Boissons locales &amp; Jus</option>
+                <option value="desserts">Desserts &amp; Douceurs</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label for="badge">Badge (facultatif)</label>
+              <select id="badge">
+                <option value="">Aucun badge</option>
+                <option value="Populaire">Populaire</option>
+                <option value="Best-seller">Best-seller</option>
+                <option value="Nouveau">Nouveau</option>
+                <option value="Spécialité">Spécialité</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="description">Description des ingrédients</label>
+            <input id="description" type="text" placeholder="Ex. Servi avec attiéké frais, alloco chaud et piment fait maison.">
+          </div>
+
+          <div class="form-group">
+            <label for="image">Photo du plat</label>
+            <input id="image" type="text" placeholder="images/poulet.jpg ou URL https://...">
+            <div class="image-preset-helper">
+              <small>Photos locales disponibles :</small>
+              <div class="preset-badges">
+                <button type="button" class="preset-btn" data-img="images/riz gras.jpg">Riz gras</button>
+                <button type="button" class="preset-btn" data-img="images/to sauce gombo.jpg">Tô sauce gombo</button>
+                <button type="button" class="preset-btn" data-img="images/poulet.jpg">Poulet braisé</button>
+                <button type="button" class="preset-btn" data-img="images/brochette de boeuf.jpg">Brochettes</button>
+                <button type="button" class="preset-btn" data-img="images/atieke avec poisson.jpg">Attiéké poisson</button>
+                <button type="button" class="preset-btn" data-img="images/babenda.jpg">Babenda</button>
+                <button type="button" class="preset-btn" data-img="images/degue.jpg">Dêguê</button>
+                <button type="button" class="preset-btn" data-img="images/bissap.jpg">Bissap</button>
+                <button type="button" class="preset-btn" data-img="images/zoom--kom.jpg">Zoom-koom</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="availability">
+              <input id="available" type="checkbox" checked>
+              <span><strong>Plat disponible à la commande</strong></span>
+            </label>
+          </div>
+
+          <div class="form-actions">
+            <button type="submit" id="save-button" class="btn-primary">
+              Enregistrer le plat
+            </button>
+            <button type="button" id="cancel-button" class="btn-secondary" hidden>
+              Annuler
+            </button>
+          </div>
+        </form>
+      </div>
+    </section>
+
+    <!-- NOTIFICATION TECHNIQUE -->
+    <p class="notice">
+      Toutes les données sont enregistrées localement dans votre navigateur et synchronisées en temps réel avec le site client.
+    </p>
+
+  </main>
+
+</body>
+</html>
